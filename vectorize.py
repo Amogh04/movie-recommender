@@ -3,19 +3,21 @@ import nltk
 from nltk.stem.porter import PorterStemmer
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-	
+import pandas as pd
+
 ps = PorterStemmer()
-new_df = pickle.load(open("data.pkl","rb"))
-	
+
 def stem(text):
-    y = []
-    for i in text.split():
-    	y.append(ps.stem(i))
-    return " ".join(y)
+    return " ".join([ps.stem(word) for word in text.split()])
 
-    
-new_df.loc[:,'tags'] = new_df['tags'].apply(stem)
-cv = CountVectorizer(max_features=5000,stop_words='english')
-vectors = cv.fit_transform(new_df['tags']).toarray()
+def get_similarity():
+    new_df = pickle.load(open("data.pkl", "rb"))
+    new_df['tags'] = new_df['tags'].apply(stem)
+    cv = CountVectorizer(max_features=5000, stop_words='english')
+    vectors = cv.fit_transform(new_df['tags']).toarray()
+    similarity = cosine_similarity(vectors)
+    return similarity
 
-similarity = cosine_similarity(vectors)
+sim = get_similarity()
+pickle.dump(sim, open("similarity.pkl", "wb"))
+	
