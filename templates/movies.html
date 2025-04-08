@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Movie Recommender</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  <header>
+    <h1>🎬 Movie Recommender</h1>
+    <p>Discover movies tailored to your taste!</p>
+  </header>
+
+  <main>
+    <section class="input-section">
+      <form method="POST" action="/">
+        <input type="text" name="movie" placeholder="Enter a movie you like..." required />
+        <button type="submit">Get Recommendations</button>
+      </form>
+    </section>
+
+    {% if recommendations %}
+    <section class="recommendations">
+      <h2>Recommended Movies for {{ movie.capitalize() }}:</h2>
+      {% for movie_i in recommendations %}
+        <div class="movie-card">
+          <div> {{ movie_i.title }}</div>
+          <div><img src="{{movie_i.thumb}}" alt=""></div>
+        </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+  </main>
+
+  <footer>
+    <p>© 2025 Movie Recommender App</p>
+  </footer>
+</body>
+</html>
+	
