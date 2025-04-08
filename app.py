@@ -5,7 +5,7 @@ import pickle
 import os
 from dotenv import load_dotenv
 # from vectorize import get_similarity
-    
+import fetch_pickle
     
 load_dotenv()
 api_key = os.getenv("api_key")
