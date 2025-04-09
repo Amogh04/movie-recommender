@@ -15,22 +15,65 @@
   <main>
     <section class="input-section">
       <form method="POST" action="/">
-        <input type="text" name="movie" placeholder="Enter a movie you like..." required />
+        <input type="text" name="movie" placeholder="Enter a movie you like..." required autocomplete="off" 
+        autocorrect="off"/>
         <button type="submit">Get Recommendations</button>
       </form>
     </section>
 
-    {% if recommendations %}
-    <section class="recommendations">
-      <h2>Recommended Movies for {{ movie.capitalize() }}:</h2>
-      {% for movie_i in recommendations %}
-        <div class="movie-card">
-          <div> {{ movie_i.title }}</div>
-          <div><img src="{{movie_i.thumb}}" alt=""></div>
-        </div>
-      {% endfor %}
-    </section>
-    {% endif %}
+    <div class="suggestion-box">
+      <div class="suggestion-item">
+        <form action="/" method="POST">
+          <input type="text" name="movie" id="" hidden>
+          <button></button>
+        </form>
+      </div>
+    </div>
+
+    {% if suggest==False%}
+        {% if len(recommendations)>1%}
+        <section class="recommendations">
+          <h2>Recommended Movies for {{ movie.capitalize() }}:</h2>
+          {% for movie_i in recommendations %}
+          <form method="POST" action="/">
+            <input name="movie" value="{{ movie_i.title }}" hidden/>
+            <div class="movie-card">
+              <button type="submit">
+                <div> {{ movie_i.title }}</div>
+                <div><img src="{{movie_i.thumb}}" alt=""></div>
+              </button>
+            </div>
+          </form>
+          {% endfor %}
+        </section>
+        {% elif len(recommendations)==1 %}
+        <section class="recommendations">
+          <h2>{{ recommendations[0] }}:</h2>
+        </section>
+        {% endif %}
+
+    {%else%}
+
+        <section class="recommendations">
+          <h2>Did you mean:</h2>
+
+          {% for i in range(top_ten) %}
+          <form method="POST" action="/">
+            <input name="movie" value="{{ movies.title[movies.index[i]] }}" hidden/>
+            <div class="movie-card">
+              <button type="submit">
+                <div> {{ movies.title[movies.index[i]] }} </div>
+                <div><img src="{{ get_poster(movies.id[movies.index[i]]) }}" alt=""></div>
+              </button>
+            </div>
+          </form>
+          {% endfor %}
+        </section>
+
+    {%endif%}
+    
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
   </main>
 
   <footer>
@@ -38,4 +81,3 @@
   </footer>
 </body>
 </html>
-	

@@ -30,7 +30,6 @@ header p {
 .input-section {
   display: flex;
   justify-content: center;
-  margin-bottom: 30px;
   gap: 10px;
 }
 
@@ -58,7 +57,7 @@ header p {
 .recommendations {
   text-align: center;
 }
-
+  
 .recommendations h2 {
   margin-bottom: 20px;
 }
@@ -68,7 +67,6 @@ header p {
 }
 
 .movie-card {
-
   background-color: #1e1e1e;
   display: inline-block;
   margin: 10px;
@@ -83,9 +81,55 @@ header p {
   transform: scale(1.05);
 }
 
+.movie-card button div{
+  margin-bottom: 15px;
+}
+
 footer {
   margin-top: 50px;
   text-align: center;
   font-size: 0.9rem;
   color: #aaa;
+}
+
+.suggestion-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+
+}
+  
+.suggestion-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 15px;
+  color: #ffffff;
+  transition: background 0.2s;
+  height: 5em;
+  background-color: #ffffff00;
+  text-align: center;
+  width: 300px;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  position: relative;
+  right:5.5em;
+}
+  
+.change-color{
+  background-color: #222;
+}
+  
+button{
+  color:white;
+  border: none;
+  background-color: #00000000;
+  cursor: pointer;
+  font-size: 1rem;
+}
+  
+
+.recommendations form{
+  display: inline-block;
 }
