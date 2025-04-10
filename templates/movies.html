@@ -33,7 +33,14 @@
     {% if suggest==False%}
         {% if len(recommendations)>1%}
         <section class="recommendations">
-          <h2>Recommended Movies for {{ movie.capitalize() }}:</h2>
+          <div class="movie-description">
+            <img src="{{get_poster(movie.iloc[0]['id'])}}" alt="">
+            <div>
+              <h2>{{ movie.iloc[0]['title'].title()}}</h2>
+              <p>{{ movie.iloc[0]['description'] }}</p>
+            </div>
+          </div>
+          <h2>Recommended Movies for {{ movie.iloc[0]['title'].title()}}:</h2>
           {% for movie_i in recommendations %}
           <form method="POST" action="/">
             <input name="movie" value="{{ movie_i.title }}" hidden/>
@@ -48,7 +55,7 @@
         </section>
         {% elif len(recommendations)==1 %}
         <section class="recommendations">
-          <h2>{{ recommendations[0] }}:</h2>
+          <h2>{{ recommendations[0] }}</h2>
         </section>
         {% endif %}
 
@@ -56,13 +63,12 @@
 
         <section class="recommendations">
           <h2>Did you mean:</h2>
-
           {% for i in range(top_ten) %}
           <form method="POST" action="/">
             <input name="movie" value="{{ movies.title[movies.index[i]] }}" hidden/>
             <div class="movie-card">
               <button type="submit">
-                <div> {{ movies.title[movies.index[i]] }} </div>
+                <div> {{ movies.title[movies.index[i]].title() }} </div>
                 <div><img src="{{ get_poster(movies.id[movies.index[i]]) }}" alt=""></div>
               </button>
             </div>
