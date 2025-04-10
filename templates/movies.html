@@ -8,9 +8,10 @@
 </head>
 <body>
   <header>
-    <h1>🎬 Movie Recommender</h1>
-    <p>Discover movies tailored to your taste!</p>
+    <h1><a href="/" style="text-decoration: none; color: #ff4c68;">🎬 Movie Recommender</a></h1>
+      <p>Discover movies tailored to your taste!</p>
   </header>
+
 
   <main>
     <section class="input-section">
@@ -20,7 +21,7 @@
         <button type="submit">Get Recommendations</button>
       </form>
     </section>
-
+    
     <div class="suggestion-box">
       <div class="suggestion-item">
         <form action="/" method="POST">
@@ -36,7 +37,7 @@
           <div class="movie-description">
             <img src="{{get_poster(movie.iloc[0]['id'])}}" alt="">
             <div>
-              <h2>{{ movie.iloc[0]['title'].title()}}</h2>
+              <h2>{{ movie.iloc[0]['title'].title()}} <span class="release_date">({{movie.iloc[0]['release_date'][:4]}})</span></h2>
               <p>{{ movie.iloc[0]['description'] }}</p>
             </div>
           </div>

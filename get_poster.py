@@ -15,3 +15,4 @@ def get_poster(movie_id):
 	else:
 		image_url=''
 	return image_url
+	

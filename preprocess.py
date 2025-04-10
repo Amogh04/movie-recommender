@@ -13,6 +13,16 @@ movies = movies.merge(credits, on='title')
 movies = movies[['id','title','genres','keywords','overview','popularity','production_companies','cast','crew','release_date']]
 movies['description'] = movies['overview']
 
+popularity_tag = []
+for val in movies['popularity']:
+    if val > 100:
+        popularity_tag.append(['popularity_high'])
+    elif val >= 50:
+        popularity_tag.append(['popularity_med'])
+    else:
+        popularity_tag.append(['popularity_low'])
+movies['popularity_tag'] = popularity_tag
+    
 movies.isnull().sum()
 movies.dropna(inplace=True)
 
